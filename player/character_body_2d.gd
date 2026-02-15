@@ -1,5 +1,6 @@
 extends CharacterBody2D
-var speed = 100
+
+var speed = 200
 
 func _physics_process(delta):
 	var input_direction = Vector2(
@@ -8,4 +9,5 @@ func _physics_process(delta):
 	)
 
 	position += input_direction * delta * speed
+	
 	move_and_slide()
