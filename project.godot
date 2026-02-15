@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Butterfly Game"
-run/main_scene="uid://bii51pud0tg86"
+run/main_scene="uid://dv10s5t1h7xq4"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
