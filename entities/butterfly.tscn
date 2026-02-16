@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://cdtl43erytt03"]
+
+[ext_resource type="Texture2D" uid="uid://d1enttab1wrkh" path="res://icon.svg" id="1_3y45c"]
+[ext_resource type="Script" uid="uid://dvbldy47mntov" path="res://entities/butterfly.gd" id="1_g6qih"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6qih"]
+size = Vector2(26, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p72sr"]
+size = Vector2(78, 44)
+
+[node name="Butterfly" type="Area2D" unique_id=2100504775 groups=["butterfly NPC"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_g6qih")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=980314599]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_3y45c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=715105351]
+shape = SubResource("RectangleShape2D_g6qih")
+
+[node name="Vision" type="Area2D" parent="." unique_id=1905207333]
+collision_layer = 0
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" unique_id=1111251607]
+position = Vector2(15, 0)
+shape = SubResource("RectangleShape2D_p72sr")
+
+[node name="Rays" type="Node2D" parent="." unique_id=93857559]
+
+[node name="RayCast2D4" type="RayCast2D" parent="Rays" unique_id=792578792]
+target_position = Vector2(47, 5)
+
+[node name="RayCast2D" type="RayCast2D" parent="Rays" unique_id=2095830007]
+target_position = Vector2(52, -4)
+
+[node name="RayCast2D3" type="RayCast2D" parent="Rays" unique_id=862473447]
+target_position = Vector2(19, -22)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Rays" unique_id=1722149121]
+target_position = Vector2(19, 21)
+
+[connection signal="area_entered" from="Vision" to="." method="_on_vision_area_entered"]
+[connection signal="area_exited" from="Vision" to="." method="_on_vision_area_exited"]

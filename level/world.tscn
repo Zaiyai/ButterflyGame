@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://jm0sf4hajk8d" path="res://assets/tilesets/baseground.webp" id="2_sw3g3"]
 [ext_resource type="Texture2D" uid="uid://d0rtr488ev4vw" path="res://assets/tilesets/baseground2.webp" id="3_tjjer"]
 [ext_resource type="PackedScene" uid="uid://brdtw6r251fmj" path="res://interactions/interaction area/interaction_area.tscn" id="4_nadbi"]
+[ext_resource type="PackedScene" uid="uid://cdtl43erytt03" path="res://entities/butterfly.tscn" id="5_lx6e4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tjjer"]
 texture = ExtResource("2_sw3g3")
@@ -27,7 +28,7 @@ sources/1 = SubResource("TileSetAtlasSource_nadbi")
 position = Vector2(3, -3)
 
 [node name="player" parent="." unique_id=1361834257 instance=ExtResource("1_07nfa")]
-position = Vector2(492, 258)
+position = Vector2(461, 273)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=356554773]
 z_index = -5
@@ -35,3 +36,10 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAIAAQAAAAA
 tile_set = SubResource("TileSet_nadbi")
 
 [node name="InteractionArea" parent="." unique_id=2126542638 instance=ExtResource("4_nadbi")]
+
+[node name="Butterflies" type="Node2D" parent="." unique_id=634715965]
+position = Vector2(500, 200)
+
+[node name="Butterfly" parent="Butterflies" unique_id=1882823118 instance=ExtResource("5_lx6e4")]
+
+[node name="Butterfly2" parent="Butterflies" unique_id=919964445 instance=ExtResource("5_lx6e4")]
