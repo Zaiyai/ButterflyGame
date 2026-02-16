@@ -15,6 +15,10 @@ run/main_scene="uid://dv10s5t1h7xq4"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+InteractionManagerScene="*uid://cysbr2q177pgf"
+
 [display]
 
 window/size/initial_position=Vector2i(-100, -100)

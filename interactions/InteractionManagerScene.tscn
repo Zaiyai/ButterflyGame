@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://cysbr2q177pgf"]
 
-[node name="InteractionManagerScene" type="Node2D" unique_id=718102552]
+[ext_resource type="Script" uid="uid://bn7wdlos5r06d" path="res://interactions/interaction_manager_scene.gd" id="1_bxip6"]
+
+[node name="InteractionManager" type="Node2D" unique_id=718102552]
+script = ExtResource("1_bxip6")
 
 [node name="Label" type="Label" parent="." unique_id=1858896266]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "[e] to interact"
+horizontal_alignment = 1
+vertical_alignment = 1

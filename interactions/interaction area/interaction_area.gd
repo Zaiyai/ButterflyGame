@@ -3,5 +3,13 @@ class_name InteractionArea
 
 @export var action_name: String = "interact"
 
+var interact : Callable = func():
+	pass
+
 func _on_body_entered(body: Node2D) -> void:
-	print("hello")
+	InteractionManagerScene.register_area(self)
+	
+
+
+func _on_body_exited(body: Node2D) -> void:
+	InteractionManagerScene.unregister_area(self)
