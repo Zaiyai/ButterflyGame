@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmrm14xu4dcpv"
-path="res://.godot/imported/buttterfly_movement_sprites.webp-9dd08595342f0a1153d9105a1316d0ff.ctex"
+uid="uid://dunwphltklt6g"
+path="res://.godot/imported/butterfly_sprites.webp-6dd9fabdf99e7b2a3c237232151ca5f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/character_sprites/buttterfly_movement_sprites.webp"
-dest_files=["res://.godot/imported/buttterfly_movement_sprites.webp-9dd08595342f0a1153d9105a1316d0ff.ctex"]
+source_file="res://assets/character_sprites/butterfly_sprites.webp"
+dest_files=["res://.godot/imported/butterfly_sprites.webp-6dd9fabdf99e7b2a3c237232151ca5f6.ctex"]
 
 [params]
 
