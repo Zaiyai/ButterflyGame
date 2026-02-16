@@ -1,7 +1,8 @@
-[gd_scene format=3 uid="uid://sv0ds6ywinwi"]
+[gd_scene format=3 uid="uid://bii51pud0tg86"]
 
-[ext_resource type="Script" uid="uid://d0y47673h4yvv" path="res://player/character_body_2d.gd" id="1_ebx5c"]
-[ext_resource type="Texture2D" uid="uid://bsxdm0eylkfmi" path="res://assets/character_sprites/sprites.png" id="2_d1dig"]
+[ext_resource type="Script" uid="uid://d0y47673h4yvv" path="res://player/character_body_2d.gd" id="1_rkbax"]
+[ext_resource type="Texture2D" uid="uid://bsxdm0eylkfmi" path="res://assets/character_sprites/sprites.png" id="2_rkbax"]
+[ext_resource type="Script" uid="uid://r83dq73lmedy" path="res://player/area_2d.gd" id="3_g1dw6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
 size = Vector2(128.125, 129.6875)
@@ -78,28 +79,39 @@ states/fly/node = SubResource("AnimationNodeBlendSpace2D_hg6s5")
 states/fly/position = Vector2(427, 100)
 transitions = ["Start", "fly", SubResource("AnimationNodeStateMachineTransition_g6k8r")]
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1522574350]
-collision_mask = 2
-script = ExtResource("1_ebx5c")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
+size = Vector2(1149, 641)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1739325174]
+[node name="player" type="Node2D" unique_id=1361834257]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1638922487]
+script = ExtResource("1_rkbax")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1593832908]
 position = Vector2(0, -0.5)
 scale = Vector2(0.64, 0.64)
 shape = SubResource("RectangleShape2D_yw30f")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2144695653]
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1523680427]
 offset = Vector2(20, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1040040528]
-texture = ExtResource("2_d1dig")
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=356365853]
+texture = ExtResource("2_rkbax")
 hframes = 4
 vframes = 2
 frame = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1098130756]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D" unique_id=2067480710]
 libraries/ = SubResource("AnimationLibrary_rgyib")
 
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=2037085199]
+[node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D" unique_id=78796656]
 tree_root = SubResource("AnimationNodeStateMachine_8t03j")
 anim_player = NodePath("../AnimationPlayer")
 parameters/fly/blend_position = Vector2(0, 0)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=197552381]
+script = ExtResource("3_g1dw6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=765969591]
+position = Vector2(17.5, 1.5)
+shape = SubResource("RectangleShape2D_rkbax")
