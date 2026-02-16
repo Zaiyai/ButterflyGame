@@ -55,6 +55,11 @@ states/fly/node = SubResource("AnimationNodeAnimation_rkbax")
 states/fly/position = Vector2(377, 100)
 transitions = ["Start", "fly", SubResource("AnimationNodeStateMachineTransition_g1dw6")]
 
+[sub_resource type="Environment" id="Environment_rkbax"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 1.0
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1522574350]
 collision_mask = 2
 script = ExtResource("1_ebx5c")
@@ -65,6 +70,7 @@ scale = Vector2(0.64, 0.64)
 shape = SubResource("RectangleShape2D_yw30f")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1412860305]
+modulate = Color(2.2241454, 2.2241454, 2.2241454, 1)
 texture = ExtResource("2_rkbax")
 hframes = 4
 vframes = 4
@@ -81,3 +87,6 @@ autoplay = &"fly"
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1560177120]
 tree_root = SubResource("AnimationNodeStateMachine_rkbax")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1822333495]
+environment = SubResource("Environment_rkbax")
