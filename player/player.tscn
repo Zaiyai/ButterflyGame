@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://sv0ds6ywinwi"]
+[gd_scene format=3 uid="uid://3ketpr3fmsg"]
 
 [ext_resource type="Script" uid="uid://d0y47673h4yvv" path="res://player/character_body_2d.gd" id="1_ebx5c"]
 [ext_resource type="Texture2D" uid="uid://cmrm14xu4dcpv" path="res://assets/character_sprites/buttterfly_movement_sprites.webp" id="2_rkbax"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
-size = Vector2(128.125, 129.6875)
+size = Vector2(37.5, 39.0625)
 
 [sub_resource type="Animation" id="Animation_rkbax"]
 length = 0.001
@@ -60,7 +60,7 @@ collision_mask = 2
 script = ExtResource("1_ebx5c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1739325174]
-position = Vector2(0, -0.5)
+position = Vector2(-1, -1.5)
 scale = Vector2(0.64, 0.64)
 shape = SubResource("RectangleShape2D_yw30f")
 
