@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://dv10s5t1h7xq4"]
 
-[ext_resource type="PackedScene" uid="uid://3ketpr3fmsg" path="res://player/player.tscn" id="1_07nfa"]
+[ext_resource type="PackedScene" uid="uid://sv0ds6ywinwi" path="res://player/player.tscn" id="1_07nfa"]
+[ext_resource type="PackedScene" uid="uid://ceylh0c1e7l6h" path="res://audio/environment/ForestSounds.tscn" id="1_nadbi"]
 [ext_resource type="Texture2D" uid="uid://boto8qbhv6cuf" path="res://assets/tilesets/Grass_Tiles.webp" id="3_tjjer"]
 [ext_resource type="PackedScene" uid="uid://brdtw6r251fmj" path="res://interactions/interaction area/interaction_area.tscn" id="4_nadbi"]
-[ext_resource type="PackedScene" uid="uid://cdtl43erytt03" path="res://entities/butterfly.tscn" id="5_lx6e4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nadbi"]
 texture = ExtResource("3_tjjer")
@@ -39,6 +39,8 @@ sources/0 = SubResource("TileSetAtlasSource_nadbi")
 
 [node name="World" type="Node2D" unique_id=1756987506]
 position = Vector2(3, -3)
+
+[node name="ForestSounds" parent="." unique_id=456073008 instance=ExtResource("1_nadbi")]
 
 [node name="player" parent="." unique_id=1361834257 groups=["player"] instance=ExtResource("1_07nfa")]
 position = Vector2(492, 258)
