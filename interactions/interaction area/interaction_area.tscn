@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://brdtw6r251fmj"]
 
 [ext_resource type="Script" uid="uid://buccdgwp0e2ry" path="res://interactions/interaction area/interaction_area.gd" id="1_wgbjv"]
+[ext_resource type="Texture2D" uid="uid://d1enttab1wrkh" path="res://icon.svg" id="2_bwvie"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bwvie"]
 radius = 27.166155
@@ -12,4 +13,10 @@ script = ExtResource("1_wgbjv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=4799007]
 shape = SubResource("CircleShape2D_bwvie")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=634163182]
+position = Vector2(2, 0)
+scale = Vector2(0.296875, 0.3125)
+texture = ExtResource("2_bwvie")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
