@@ -1,15 +1,13 @@
-[gd_scene format=3 uid="uid://sv0ds6ywinwi"]
+[gd_scene format=3 uid="uid://3ketpr3fmsg"]
 
 [ext_resource type="Script" uid="uid://d0y47673h4yvv" path="res://player/character_body_2d.gd" id="1_ebx5c"]
-[ext_resource type="Texture2D" uid="uid://bsxdm0eylkfmi" path="res://assets/character_sprites/sprites.png" id="2_d1dig"]
+[ext_resource type="Texture2D" uid="uid://cmrm14xu4dcpv" path="res://assets/character_sprites/buttterfly_movement_sprites.webp" id="2_rkbax"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
-size = Vector2(128.125, 129.6875)
+size = Vector2(37.5, 39.0625)
 
-[sub_resource type="Animation" id="Animation_yw30f"]
-resource_name = "fly_left"
-length = 0.4
-step = 0.1
+[sub_resource type="Animation" id="Animation_rkbax"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -17,15 +15,16 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4, 5, 6]
+"values": [3]
 }
 
-[sub_resource type="Animation" id="Animation_qjkh3"]
-resource_name = "fly_right"
-length = 0.4
+[sub_resource type="Animation" id="Animation_g1dw6"]
+resource_name = "fly"
+length = 0.75
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -33,73 +32,61 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.10000001, 0.2, 0.33333334),
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [4, 5, 6, 7]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rgyib"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yw30f"]
 _data = {
-&"fly_left": SubResource("Animation_yw30f"),
-&"fly_right": SubResource("Animation_qjkh3")
+&"RESET": SubResource("Animation_rkbax"),
+&"fly": SubResource("Animation_g1dw6")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rkbax"]
-animation = &"fly_right"
+animation = &"fly"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g1dw6"]
-animation = &"fly_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yw30f"]
-animation = &"fly_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qjkh3"]
-animation = &"fly_right"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_hg6s5"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_rkbax")
-blend_point_0/pos = Vector2(0, 1.1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_g1dw6")
-blend_point_1/pos = Vector2(0, -1.1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_yw30f")
-blend_point_2/pos = Vector2(-1, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_qjkh3")
-blend_point_3/pos = Vector2(1, 0)
-min_space = Vector2(-1, -1.1)
-max_space = Vector2(1, 1.1)
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g6k8r"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g1dw6"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8t03j"]
-states/Start/position = Vector2(254, 100)
-states/fly/node = SubResource("AnimationNodeBlendSpace2D_hg6s5")
-states/fly/position = Vector2(427, 100)
-transitions = ["Start", "fly", SubResource("AnimationNodeStateMachineTransition_g6k8r")]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rkbax"]
+states/fly/node = SubResource("AnimationNodeAnimation_rkbax")
+states/fly/position = Vector2(377, 100)
+transitions = ["Start", "fly", SubResource("AnimationNodeStateMachineTransition_g1dw6")]
+
+[sub_resource type="Environment" id="Environment_rkbax"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 1.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1522574350]
 collision_mask = 2
 script = ExtResource("1_ebx5c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1739325174]
-position = Vector2(0, -0.5)
+position = Vector2(-1, -1.5)
 scale = Vector2(0.64, 0.64)
 shape = SubResource("RectangleShape2D_yw30f")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1412860305]
+modulate = Color(2.2241454, 2.2241454, 2.2241454, 1)
+texture = ExtResource("2_rkbax")
+hframes = 4
+vframes = 4
+frame = 3
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2144695653]
 offset = Vector2(20, 0)
+zoom = Vector2(2, 2)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1040040528]
-texture = ExtResource("2_d1dig")
-hframes = 4
-vframes = 2
-frame = 5
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1269333928]
+libraries/ = SubResource("AnimationLibrary_yw30f")
+autoplay = &"fly"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1098130756]
-libraries/ = SubResource("AnimationLibrary_rgyib")
-
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=2037085199]
-tree_root = SubResource("AnimationNodeStateMachine_8t03j")
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1560177120]
+tree_root = SubResource("AnimationNodeStateMachine_rkbax")
 anim_player = NodePath("../AnimationPlayer")
-parameters/fly/blend_position = Vector2(0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1822333495]
+environment = SubResource("Environment_rkbax")
