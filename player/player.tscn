@@ -6,15 +6,30 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
 size = Vector2(37.5, 39.0625)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rkbax"]
+polygon = PackedVector2Array(-9, 0, -7, 2, -9, 6, -5, 8, -2, 6, 3, 8, 7, 6, 2, 1, 7, 0, 2, -1, 6, -6, 3, -8, -2, -6, -5, -7, -9, -6, -7, -2)
+
 [sub_resource type="Animation" id="Animation_g1dw6"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("player:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player/playerShadow:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -28,10 +43,22 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("player:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.4, 0.53333336, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player/playerShadow:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.4, 0.53333336, 0.6666667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
@@ -63,7 +90,18 @@ script = ExtResource("1_ebx5c")
 scale = Vector2(0.64, 0.64)
 shape = SubResource("RectangleShape2D_yw30f")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1412860305]
+[node name="player" type="Sprite2D" parent="." unique_id=1412860305]
+texture = ExtResource("2_rkbax")
+hframes = 6
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="player" unique_id=300513924]
+occluder = SubResource("OccluderPolygon2D_rkbax")
+
+[node name="playerShadow" type="Sprite2D" parent="player" unique_id=723578163]
+visible = false
+modulate = Color(0.062487274, 0.062487274, 0.062487274, 0.54901963)
+show_behind_parent = true
+position = Vector2(0, 4.485)
 texture = ExtResource("2_rkbax")
 hframes = 6
 

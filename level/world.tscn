@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dv10s5t1h7xq4"]
 
 [ext_resource type="PackedScene" uid="uid://3ketpr3fmsg" path="res://player/player.tscn" id="1_07nfa"]
+[ext_resource type="Texture2D" uid="uid://djlnmr2xattax" path="res://assets/pixil-frame-0.png" id="1_nadbi"]
 [ext_resource type="Texture2D" uid="uid://boto8qbhv6cuf" path="res://assets/tilesets/Grass_Tiles.webp" id="3_tjjer"]
 [ext_resource type="PackedScene" uid="uid://brdtw6r251fmj" path="res://interactions/interaction area/interaction_area.tscn" id="4_nadbi"]
 
@@ -39,8 +40,17 @@ sources/0 = SubResource("TileSetAtlasSource_nadbi")
 [node name="World" type="Node2D" unique_id=1756987506]
 position = Vector2(3, -3)
 
+[node name="pointLight2d" type="PointLight2D" parent="." unique_id=1699785199]
+position = Vector2(571.6563, 103.76171)
+scale = Vector2(2.76294, 2.308865)
+energy = 0.2
+range_z_min = -1483
+range_z_max = 587
+shadow_enabled = true
+texture = ExtResource("1_nadbi")
+
 [node name="player" parent="." unique_id=1361834257 instance=ExtResource("1_07nfa")]
-position = Vector2(492, 258)
+position = Vector2(492.00003, 258)
 
 [node name="InteractionArea" parent="." unique_id=2126542638 instance=ExtResource("4_nadbi")]
 
