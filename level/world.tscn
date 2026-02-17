@@ -55,3 +55,10 @@ tile_set = SubResource("TileSet_lx6e4")
 
 [node name="flower_2" parent="." unique_id=1513199477 groups=["flowers"] instance=ExtResource("4_nadbi")]
 position = Vector2(750, -200)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1627786916]
+color = Color(0.2842246, 0.5304198, 0.56516814, 1)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1034241786]
+visible = false
+energy = 0.2
