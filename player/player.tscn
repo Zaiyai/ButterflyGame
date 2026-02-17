@@ -69,7 +69,7 @@ hframes = 6
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2144695653]
 offset = Vector2(20, 0)
-zoom = Vector2(2, 2)
+zoom = Vector2(1.8, 1.8)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2121973431]
 libraries/ = SubResource("AnimationLibrary_qjkh3")
