@@ -29,12 +29,6 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("left click"):
 		clickPosition = get_global_mouse_position()
 		clickTargetRot = global_position.angle_to_point(clickPosition)
-	
-	#rotation = lerp_angle(rotation, clickTargetRot, rotationSpeed * delta)
-	
-	#if abs(angle_difference(rotation, clickTargetRot)) < 0.1:
-		#clickTargetRot = global_position.angle_to_point(clickPosition)
-		#rotation = clickTargetRot
 
 # Player Movement
 	
