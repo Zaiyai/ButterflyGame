@@ -47,6 +47,9 @@ _data = {
 &"fly": SubResource("Animation_bkq4y")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_a6ji1"]
+radius = 86.145226
+
 [node name="Butterfly" type="Area2D" unique_id=2100504775 groups=["butterfly NPC"]]
 collision_layer = 4
 collision_mask = 7
@@ -87,5 +90,19 @@ target_position = Vector2(18.025059, 18.468819)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=469598884]
 libraries/ = SubResource("AnimationLibrary_y05ny")
 
+[node name="FlowerSense" type="Area2D" parent="." unique_id=1321901566]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlowerSense" unique_id=961435531]
+shape = SubResource("CircleShape2D_a6ji1")
+
+[node name="Timer" type="Timer" parent="." unique_id=1907811018]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_entered" from="Vision" to="." method="_on_vision_area_entered"]
 [connection signal="area_exited" from="Vision" to="." method="_on_vision_area_exited"]
+[connection signal="area_entered" from="FlowerSense" to="." method="_on_flower_sense_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

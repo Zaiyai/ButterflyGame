@@ -6,17 +6,30 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_bwvie"]
 radius = 27.166155
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hm20i"]
+radius = 7.0
+
 [node name="InteractionArea" type="Area2D" unique_id=2126542638]
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_wgbjv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=4799007]
+position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_bwvie")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=634163182]
 position = Vector2(2, 0)
 scale = Vector2(0.296875, 0.3125)
 texture = ExtResource("2_bwvie")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=645383313 groups=["flower_hitbox"]]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=742391590]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_hm20i")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
