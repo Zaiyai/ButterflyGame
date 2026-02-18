@@ -9,7 +9,6 @@ var clickDistance = Vector2()
 var clickTargetRot: float = 0.0
 var rotationSpeed: float  = 6.0
 
-
 # Camera Zoom Control Variables
 var zoomOutSpd = 0.5;
 var zoomDefSpd = 0.8;
@@ -26,23 +25,24 @@ func _ready():
 	clickPosition = global_position
 
 func _physics_process(delta):
-
 # Mouse Position Check and Turn
 	if Input.is_action_just_pressed("left click"):
 		clickPosition = get_global_mouse_position()
 		clickTargetRot = global_position.angle_to_point(clickPosition)
-		
-	rotation = lerp_angle(rotation, clickTargetRot, rotationSpeed * delta)
 	
-	if abs(angle_difference(rotation, clickTargetRot)) < 0.2:
-		rotation = clickTargetRot
+	#rotation = lerp_angle(rotation, clickTargetRot, rotationSpeed * delta)
+	
+	#if abs(angle_difference(rotation, clickTargetRot)) < 0.1:
+		#clickTargetRot = global_position.angle_to_point(clickPosition)
+		#rotation = clickTargetRot
 
 # Player Movement
 	
 	if position.distance_to(clickPosition) > 25:
+		var desired_angle = global_position.angle_to_point(clickPosition)
+		rotation = lerp_angle(rotation, desired_angle, rotationSpeed * delta)
 		var forwardFace: Vector2 = Vector2.RIGHT.rotated(rotation)
 		velocity = velocity.move_toward(forwardFace * speed, acceleration * delta)
-		
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	move_and_slide()
