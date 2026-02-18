@@ -1,36 +1,27 @@
 extends Area2D
 
 @onready var rays := $Rays.get_children()
+@export var speed := 2.0
 var butterfliesISee := []
 var vel := Vector2.ONE
-var speed := 7.0
-var screensize : Vector2
+var flower_target : Node2D = null
 var movv := 48
+var flowerSenseCount := 0
 
 var rng = RandomNumberGenerator.new().randi_range(0, 10)
 
 func _ready() -> void:
-	screensize = get_viewport_rect().size
-	position += Vector2(rng, rng)
-	randomize()
+	$AnimationPlayer.play("fly")
 
 func _physics_process(_delta: float) -> void:
-	boids()
-	checkCollision()
-	vel = vel.normalized() * speed
-	move()
-	rotation = lerp_angle(rotation, vel.angle_to_point(Vector2.ZERO), 0.4)
+	if $Timer.time_left <= 0:
+		boids()
+		vel = vel.normalized() * speed
+		move()
+		rotation = lerp_angle(rotation, vel.angle_to_point(Vector2.ZERO), 0.4)
 
 func move():
 	global_position += vel
-	#if global_position.x < 0:
-		#global_position.x = screensize.x
-	#if global_position.x > 0:
-		#global_position.x = screensize.x
-	#if global_position.y < 0:
-		#global_position.x = screensize.y
-	#if global_position.y > 0:
-		#global_position.x = screensize.y
 
 func boids():
 	if butterfliesISee:
@@ -52,15 +43,17 @@ func boids():
 		
 		steerAway /= numberOfButterflies
 		vel += (steerAway)
+		
+	if flower_target:
+		var desired = (flower_target.global_position - global_position).normalized() * speed
+		vel += (desired - vel) * 0.3
+		
+		if flowerSenseCount > 1:
+			$Timer.start()
+			vel = Vector2.ZERO
+			flower_target = null
+			flowerSenseCount = 0
 	
-func checkCollision():
-	for ray in rays:
-		var r : RayCast2D = ray
-		if r.is_colliding():
-			if r.get_collider().is_in_group("tree"):
-				var magi := 100/(r.get_collision_point() - global_position).length_squared()
-				vel -= (r.cast_to.rotated(rotation) * magi)
-
 func _on_vision_area_entered(area: Area2D) -> void:
 	if area != self and area.is_in_group("butterfly NPC"):
 		butterfliesISee.append(area)
@@ -68,3 +61,14 @@ func _on_vision_area_entered(area: Area2D) -> void:
 func _on_vision_area_exited(area: Area2D) -> void:
 	if area:
 		butterfliesISee.erase(area)
+
+func _on_flower_sense_area_entered(area: Area2D) -> void:
+	if area.is_in_group("flowers"):
+		flower_target = area
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("flower_hitbox"):
+		flowerSenseCount += 1
+
+func _on_timer_timeout() -> void:
+	vel = Vector2.ONE

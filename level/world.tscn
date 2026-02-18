@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://brdtw6r251fmj" path="res://interactions/interaction area/interaction_area.tscn" id="4_nadbi"]
 [ext_resource type="Texture2D" uid="uid://bmmr4l6so7480" path="res://assets/Screenshot_2026-02-17_152953.webp" id="5_lx6e4"]
 [ext_resource type="Script" uid="uid://dj8w85anihgtg" path="res://level/camera_zoom_area.gd" id="6_hx6qw"]
+[ext_resource type="PackedScene" uid="uid://n2xogrdexdf8" path="res://entities/butterflies/butterflies_container.tscn" id="7_riu67"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nadbi"]
 texture = ExtResource("3_tjjer")
@@ -48,7 +49,7 @@ position = Vector2(3, -3)
 position = Vector2(492, 258)
 
 [node name="flower_1" parent="." unique_id=2126542638 groups=["flowers"] instance=ExtResource("4_nadbi")]
-position = Vector2(350, 0)
+position = Vector2(675, 187)
 action_name = "INTERACT"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=309430264]
@@ -71,7 +72,6 @@ position = Vector2(750, -200)
 color = Color(0.2842246, 0.5304198, 0.56516814, 1)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1034241786]
-visible = false
 energy = 0.2
 
 [node name="cameraZoomArea" type="Area2D" parent="." unique_id=1469508407]
@@ -80,6 +80,9 @@ script = ExtResource("6_hx6qw")
 [node name="collisionPolygon2D" type="CollisionPolygon2D" parent="cameraZoomArea" unique_id=434004435]
 position = Vector2(17, -395)
 polygon = PackedVector2Array(-5, 8, 233, 67, 423, 19, 578, 8, 744, 8, 1092, -68, 1386, -399, 1617, -688, 1588, -1160, 1317, -1483, 951, -1663, 527, -1548, 306, -1344, 114, -1419, 5, -1532, -74, -1793, -319, -1805, -467, -1916, -406, -2018, -361, -2482, -188, -2524, -74, -2523, 18, -2506, 302, -2693, 547.48755, -2986.1802, 623, -3248, 776.26025, -3445.5044, 874, -3766, 1003, -3933, 1191, -4055, 1229, -4485, 1091, -4652, 1108, -4815, 1124, -5049, 959, -5206, 753, -5320, 580, -5452, 447, -5485, 288, -5446, 193, -5439, -305, -6370, -284, -6497, -234, -6660, -156, -6784, -400, -6987, -292, -7121, -237, -7300, -287, -7426, -302, -7530, -225, -7626, -133, -7680, 68, -7476, 343, -7480, 490, -7225, 874, -7100, 1041, -6991, 1367, -7087, 1693, -7346, 2094, -7647, 1968, -7965, 1684, -8269, 1496, -8366, 1221, -8491, 1024, -8570, 953, -8846, 807, -9097, 978, -9314, 832, -9539, 715, -9640, 485, -9715, 385, -9564, 101, -9498, -95, -9193, -33, -8762, -204, -8395, -308, -8094, -680, -7902, -1056, -7831, -1528, -7864, -1720, -7559, -1662, -7284, -1808, -6966, -1787, -6534, -1461, -6239, -705, -6172, -338, -6273, 114, -5412, -246, -5132, -588, -4890, -722, -4698, -588, -4142, -747, -3587, -609, -3058, -418, -2685, -396, -2496, -434, -2020, -743, -1757, -943, -1657, -1044, -1298, -881, -922, -835, -550, -321, -207)
+
+[node name="ButterfliesContainer" parent="." unique_id=836024158 instance=ExtResource("7_riu67")]
+position = Vector2(578, 66)
 
 [connection signal="body_entered" from="cameraZoomArea" to="player" method="_on_camera_zoom_area_body_entered"]
 [connection signal="body_exited" from="cameraZoomArea" to="player" method="_on_camera_zoom_area_body_exited"]

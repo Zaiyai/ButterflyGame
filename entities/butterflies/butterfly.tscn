@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://cdtl43erytt03"]
+
+[ext_resource type="Script" uid="uid://dvbldy47mntov" path="res://entities/butterflies/butterfly.gd" id="1_g6qih"]
+[ext_resource type="Texture2D" uid="uid://dunwphltklt6g" path="res://assets/character_sprites/butterfly_sprites.webp" id="2_a6ji1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6qih"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p72sr"]
+size = Vector2(65, 44)
+
+[sub_resource type="Animation" id="Animation_a6ji1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_bkq4y"]
+resource_name = "fly"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y05ny"]
+_data = {
+&"RESET": SubResource("Animation_a6ji1"),
+&"fly": SubResource("Animation_bkq4y")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a6ji1"]
+radius = 86.145226
+
+[node name="Butterfly" type="Area2D" unique_id=2100504775 groups=["butterfly NPC"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_g6qih")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=980314599]
+rotation = 3.1415927
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_a6ji1")
+hframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=715105351]
+shape = SubResource("RectangleShape2D_g6qih")
+
+[node name="Vision" type="Area2D" parent="." unique_id=1905207333]
+collision_layer = 0
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" unique_id=1111251607]
+position = Vector2(-12.5, 0)
+shape = SubResource("RectangleShape2D_p72sr")
+
+[node name="Rays" type="Node2D" parent="." unique_id=93857559]
+
+[node name="RayCast2D4" type="RayCast2D" parent="Rays" unique_id=792578792]
+target_position = Vector2(-36, 5)
+
+[node name="RayCast2D" type="RayCast2D" parent="Rays" unique_id=2095830007]
+target_position = Vector2(-42, -3)
+
+[node name="RayCast2D3" type="RayCast2D" parent="Rays" unique_id=862473447]
+target_position = Vector2(-13, -21)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Rays" unique_id=1722149121]
+rotation = 1.3934884
+target_position = Vector2(18.025059, 18.468819)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=469598884]
+libraries/ = SubResource("AnimationLibrary_y05ny")
+
+[node name="FlowerSense" type="Area2D" parent="." unique_id=1321901566]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlowerSense" unique_id=961435531]
+shape = SubResource("CircleShape2D_a6ji1")
+
+[node name="Timer" type="Timer" parent="." unique_id=1907811018]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_entered" from="Vision" to="." method="_on_vision_area_entered"]
+[connection signal="area_exited" from="Vision" to="." method="_on_vision_area_exited"]
+[connection signal="area_entered" from="FlowerSense" to="." method="_on_flower_sense_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
