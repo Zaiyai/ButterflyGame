@@ -9,5 +9,9 @@ func _ready() -> void:
 func spawnButterfly():
 	var butterfly = Global.butterfly.instantiate()
 	add_child(butterfly)
-	butterfly.modulate = Color(randi_range(0,255), randi_range(0,255), randi_range(0,255), 1)
+	butterfly.modulate = Color(
+		randi_range(1,5), 
+		randi_range(1,5),
+		randi_range(1,5), 
+		1)
 	butterfly.position = Vector2(randi_range(0, 10), randi_range(0, 10))

@@ -9,6 +9,44 @@ size = Vector2(12, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p72sr"]
 size = Vector2(65, 44)
 
+[sub_resource type="Animation" id="Animation_a6ji1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_bkq4y"]
+resource_name = "fly"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y05ny"]
+_data = {
+&"RESET": SubResource("Animation_a6ji1"),
+&"fly": SubResource("Animation_bkq4y")
+}
+
 [node name="Butterfly" type="Area2D" unique_id=2100504775 groups=["butterfly NPC"]]
 collision_layer = 4
 collision_mask = 7
@@ -45,6 +83,9 @@ target_position = Vector2(-13, -21)
 [node name="RayCast2D2" type="RayCast2D" parent="Rays" unique_id=1722149121]
 rotation = 1.3934884
 target_position = Vector2(18.025059, 18.468819)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=469598884]
+libraries/ = SubResource("AnimationLibrary_y05ny")
 
 [connection signal="area_entered" from="Vision" to="." method="_on_vision_area_entered"]
 [connection signal="area_exited" from="Vision" to="." method="_on_vision_area_exited"]

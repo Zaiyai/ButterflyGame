@@ -10,6 +10,7 @@ var movv := 48
 var rng = RandomNumberGenerator.new().randi_range(0, 10)
 
 func _ready() -> void:
+	$AnimationPlayer.play("fly")
 	screensize = get_viewport_rect().size
 	position += Vector2(rng, rng)
 	randomize()
