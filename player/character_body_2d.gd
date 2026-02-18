@@ -22,3 +22,10 @@ func _physics_process(_delta):
 		velocity = target_position * speed
 		
 		move_and_slide()
+
+func _on_camera_zoom_area_body_entered(body: Node2D) -> void:
+	$Camera2D.zoom = Vector2(1, 1);
+
+
+func _on_camera_zoom_area_body_exited(body: Node2D) -> void:
+	$Camera2D.zoom = Vector2(1.8,1.8);

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://sv0ds6ywinwi"]
+[gd_scene format=3 uid="uid://3ketpr3fmsg"]
 
 [ext_resource type="Script" uid="uid://d0y47673h4yvv" path="res://player/character_body_2d.gd" id="1_ebx5c"]
 [ext_resource type="Texture2D" uid="uid://dunwphltklt6g" path="res://assets/character_sprites/butterfly_sprites.webp" id="2_rkbax"]
@@ -8,6 +8,7 @@
 size = Vector2(37.5, 39.0625)
 
 [sub_resource type="Animation" id="Animation_g1dw6"]
+resource_name = "fly"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
