@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://n2xogrdexdf8"]
+
+[ext_resource type="Script" uid="uid://dg4qhsy13cjq6" path="res://entities/butterflies/butterflies_container.gd" id="1_iw8ep"]
+
+[node name="ButterfliesContainer" type="Node2D" unique_id=836024158]
+script = ExtResource("1_iw8ep")

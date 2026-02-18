@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ceylh0c1e7l6h" path="res://audio/environment/ForestSounds.tscn" id="1_nadbi"]
 [ext_resource type="Texture2D" uid="uid://boto8qbhv6cuf" path="res://assets/tilesets/Grass_Tiles.webp" id="3_tjjer"]
 [ext_resource type="PackedScene" uid="uid://brdtw6r251fmj" path="res://interactions/interaction area/interaction_area.tscn" id="4_nadbi"]
+[ext_resource type="PackedScene" uid="uid://n2xogrdexdf8" path="res://entities/butterflies/butterflies_container.tscn" id="5_lx6e4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nadbi"]
 texture = ExtResource("3_tjjer")
@@ -62,3 +63,6 @@ color = Color(0.2842246, 0.5304198, 0.56516814, 1)
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1034241786]
 visible = false
 energy = 0.2
+
+[node name="ButterfliesContainer" parent="." unique_id=836024158 instance=ExtResource("5_lx6e4")]
+position = Vector2(598, 290)

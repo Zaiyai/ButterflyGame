@@ -21,7 +21,7 @@ buses/default_bus_layout="uid://bsewh88vv0hgk"
 
 [autoload]
 
-InteractionManagerScene="*uid://cysbr2q177pgf"
+Global="*uid://s5uukj36cssn"
 
 [display]
 

@@ -7,9 +7,7 @@ var interact : Callable = func():
 	pass
 
 func _on_body_entered(body: Node2D) -> void:
-	InteractionManagerScene.register_area(self)
+	pass
 	
-
-
 func _on_body_exited(body: Node2D) -> void:
-	InteractionManagerScene.unregister_area(self)
+	pass

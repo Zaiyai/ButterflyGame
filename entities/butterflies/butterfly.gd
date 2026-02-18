@@ -1,9 +1,9 @@
 extends Area2D
 
 @onready var rays := $Rays.get_children()
+@export var speed := 2.0
 var butterfliesISee := []
 var vel := Vector2.ONE
-var speed := 7.0
 var screensize : Vector2
 var movv := 48
 
