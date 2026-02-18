@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ceylh0c1e7l6h"]
+
+[ext_resource type="AudioStream" uid="uid://dartkhgsty660" path="res://assets/sounds/forest.ogg" id="1_4blq6"]
+
+[node name="ForestSounds" type="AudioStreamPlayer2D" unique_id=456073008]
+stream = ExtResource("1_4blq6")
+autoplay = true
+bus = &"Environment"
+parameters/looping = true

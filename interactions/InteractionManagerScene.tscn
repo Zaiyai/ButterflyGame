@@ -11,3 +11,8 @@ offset_bottom = 23.0
 text = "[e] to interact"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="." unique_id=62443148]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "good boy"
