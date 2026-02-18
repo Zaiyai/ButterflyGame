@@ -2,10 +2,13 @@ extends CharacterBody2D
 
 # Player Movement Variables
 var speed = 200
+var acceleration = 1000
+var friction = 1000
 var clickPosition = Vector2()
 var clickDistance = Vector2()
 var clickTargetRot: float = 0.0
-var rotationSpeed: float  = 8.0
+var rotationSpeed: float  = 6.0
+
 
 # Camera Zoom Control Variables
 var zoomOutSpd = 0.5;
@@ -36,18 +39,13 @@ func _physics_process(delta):
 
 # Player Movement
 	
-	if position.distance_to(clickPosition) > 10:
+	if position.distance_to(clickPosition) > 25:
 		var forwardFace: Vector2 = Vector2.RIGHT.rotated(rotation)
-		velocity = forwardFace * speed
+		velocity = velocity.move_toward(forwardFace * speed, acceleration * delta)
 		
-		move_and_slide()
 	else:
-		velocity = Vector2.ZERO * delta
-		
-		move_and_slide()
-	
-	# if position.distance_to(clickPosition) > 10:
-	# else:
+		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+	move_and_slide()
 
 # Camera Zoom Controller
 	if playerInArea:

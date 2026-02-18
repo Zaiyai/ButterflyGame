@@ -57,6 +57,7 @@ tile_map_data = PackedByteArray("AAAMAAoAAAADAAAAAAANAAoAAAADAAAAAAAOAAoAAAADAAA
 tile_set = SubResource("TileSet_lx6e4")
 
 [node name="Sprite2D" type="Sprite2D" parent="TileMapLayer" unique_id=1443140144]
+visible = false
 modulate = Color(3.1672676, 2.137196, 2.113241, 0.05882353)
 show_behind_parent = true
 position = Vector2(-82.00001, -5865)
