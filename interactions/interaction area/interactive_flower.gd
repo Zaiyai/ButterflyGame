@@ -1,8 +1,5 @@
 extends Area2D
-class_name InteractiveFlower
+class_name InteractionArea
 
-func _on_body_entered(body: Node2D) -> void:
-	pass
-	
-func _on_body_exited(body: Node2D) -> void:
-	pass
+@export var action_name: String = " INTERACT"
+var is_being_fed_on := false
