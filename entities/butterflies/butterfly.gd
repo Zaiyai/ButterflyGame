@@ -49,7 +49,6 @@ func boids():
 		last_vel = vel
 		
 	if flower_target and butterfliesISee.size() == 0:
-		print(flower_target.is_being_fed_on)
 		if flower_target.is_being_fed_on:
 			flower_target = null
 		else:
