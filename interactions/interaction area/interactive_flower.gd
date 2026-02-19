@@ -1,10 +1,5 @@
 extends Area2D
-class_name InteractionArea
-
-@export var action_name: String = " INTERACT"
-
-var interact : Callable = func():
-	pass
+class_name InteractiveFlower
 
 func _on_body_entered(body: Node2D) -> void:
 	pass

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://3ketpr3fmsg" path="res://player/player.tscn" id="1_07nfa"]
 [ext_resource type="PackedScene" uid="uid://ceylh0c1e7l6h" path="res://audio/environment/ForestSounds.tscn" id="1_nadbi"]
 [ext_resource type="Texture2D" uid="uid://boto8qbhv6cuf" path="res://assets/tilesets/Grass_Tiles.webp" id="3_tjjer"]
-[ext_resource type="PackedScene" uid="uid://brdtw6r251fmj" path="res://interactions/interaction area/interaction_area.tscn" id="4_nadbi"]
+[ext_resource type="PackedScene" uid="uid://brdtw6r251fmj" path="res://interactions/interaction area/interactive_flower.tscn" id="4_nadbi"]
 [ext_resource type="Texture2D" uid="uid://bmmr4l6so7480" path="res://assets/Screenshot_2026-02-17_152953.webp" id="5_lx6e4"]
 [ext_resource type="Script" uid="uid://dj8w85anihgtg" path="res://level/camera_zoom_area.gd" id="6_hx6qw"]
 [ext_resource type="PackedScene" uid="uid://n2xogrdexdf8" path="res://entities/butterflies/butterflies_container.tscn" id="7_riu67"]

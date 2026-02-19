@@ -7,6 +7,7 @@ var vel := Vector2.ONE
 var flower_target : Node2D = null
 var movv := 48
 var flowerSenseCount := 0
+var is_feeding := false
 
 var rng = RandomNumberGenerator.new().randi_range(0, 10)
 
@@ -44,7 +45,7 @@ func boids():
 		steerAway /= numberOfButterflies
 		vel += (steerAway)
 		
-	if flower_target:
+	if flower_target and butterfliesISee.size() == 0:
 		var desired = (flower_target.global_position - global_position).normalized() * speed
 		vel += (desired - vel) * 0.3
 		
@@ -53,9 +54,10 @@ func boids():
 			vel = Vector2.ZERO
 			flower_target = null
 			flowerSenseCount = 0
+			is_feeding = true
 	
 func _on_vision_area_entered(area: Area2D) -> void:
-	if area != self and area.is_in_group("butterfly NPC"):
+	if area != self and area.is_in_group("butterfly NPC") and area.flower_target == null:
 		butterfliesISee.append(area)
 
 func _on_vision_area_exited(area: Area2D) -> void:
@@ -71,4 +73,5 @@ func _on_area_entered(area: Area2D) -> void:
 		flowerSenseCount += 1
 
 func _on_timer_timeout() -> void:
+	is_feeding = false
 	vel = Vector2(randi_range(-1,1), randi_range(-1,1))
