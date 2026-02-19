@@ -71,4 +71,4 @@ func _on_area_entered(area: Area2D) -> void:
 		flowerSenseCount += 1
 
 func _on_timer_timeout() -> void:
-	vel = Vector2.ONE
+	vel = Vector2(randi_range(-1,1), randi_range(-1,1))
