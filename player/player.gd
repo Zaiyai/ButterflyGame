@@ -36,11 +36,10 @@ func _physics_process(delta):
 		clickTargetRot = global_position.angle_to_point(clickPosition)
 		closeClick = false
 		
-		if position.distance_to(clickPosition) <= 40:
+		if position.distance_to(clickPosition) <= 35:
 			closeClick = true
 
 # Player Movement
-	print(closeClick)
 	if !closeClick:
 		if position.distance_to(clickPosition) > 25:
 				var desired_angle = global_position.angle_to_point(clickPosition)
