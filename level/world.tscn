@@ -357,6 +357,7 @@ sources/0 = SubResource("TileSetAtlasSource_drvcl")
 script = ExtResource("11_njrq0")
 text = "Ayo man was good g"
 position = Vector2(500, -200)
+duration = 2
 metadata/_custom_type_script = "uid://dc80ok1i611m0"
 
 [sub_resource type="Animation" id="Animation_njrq0"]
@@ -467,4 +468,5 @@ libraries/ = SubResource("AnimationLibrary_y8oei")
 [connection signal="body_entered" from="cameraZoomArea" to="Player" method="_on_camera_zoom_area_body_entered"]
 [connection signal="body_exited" from="cameraZoomArea" to="Player" method="_on_camera_zoom_area_body_exited"]
 [connection signal="body_entered" from="CutScene" to="CutScene" method="_on_body_entered"]
-[connection signal="cutscene_start" from="CutScene" to="Player" method="_on_cut_scene_cutscene_start"]
+[connection signal="cutscene_end" from="CutScene" to="Player" method="_on_cut_scene_cutscene_end"]
+[connection signal="cutscene_switch" from="CutScene" to="Player" method="_on_cut_scene_cutscene_switch"]

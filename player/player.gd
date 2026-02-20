@@ -29,11 +29,11 @@ var playerInArea = false
 var can_move: bool = true
 
 #Cutscene check
-func cutscene_start():
-	can_move = !can_move
+func _on_cut_scene_cutscene_end() -> void:
+	can_move = can_move
 
-func _on_cut_scene_cutscene_start() -> void:
-	cutscene_start()
+func _on_cut_scene_cutscene_switch() -> void:
+	can_move = !can_move
 
 # Mouse Position Check
 func _ready():

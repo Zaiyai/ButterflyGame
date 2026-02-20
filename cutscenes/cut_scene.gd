@@ -6,6 +6,8 @@ enum Type {DIALOGUE, PICTURE}
 
 var _type := Type.DIALOGUE
 var _dialogue_entries: DialogueEntry
+signal cutscene_switch
+signal cutscene_end
 
 @export var type: Type:
 	get:
@@ -42,21 +44,35 @@ func _set(property, value):
 	
 func show_dialogue():
 	$dialogueFade.play("fade_in")
+func hide_dialogue():
+	$dialogueFade.play("fade_out")
 
 @onready var camera = get_parent().get_node("Player/Camera2D")
-signal cutscene_start
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-			if type == Type.DIALOGUE:
-				show_dialogue.call()
-				
-				camera.zoom = Vector2.ONE
-				camera.global_position = _dialogue_entries.position
-				
-				emit_signal("cutscene_start")
-				
-				var textLabel = Label.new()
-				add_child(textLabel)
-				textLabel.text = _dialogue_entries.text
-				textLabel.global_position = _dialogue_entries.position
+		if type == Type.DIALOGUE:
+			
+			show_dialogue.call()
+			
+			camera.zoom = Vector2.ONE
+			camera.global_position = _dialogue_entries.position
+			
+			emit_signal("cutscene_switch")
+			
+			var textLabel = Label.new()
+			add_child(textLabel)
+			textLabel.text = _dialogue_entries.text
+			textLabel.global_position = _dialogue_entries.position
+			
+			var textduration = Timer.new()
+			add_child(textduration)
+			textduration.one_shot = true
+			textduration.wait_time = _dialogue_entries.duration
+			textduration.start()
+			
+			if textduration.is_stopped() == true:
+				print("Timer has stopped")
+				if Input.is_action_just_pressed("left click"):
+					emit_signal("cutscene_end")
+					hide_dialogue.call()
