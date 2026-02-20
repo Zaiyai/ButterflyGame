@@ -49,6 +49,8 @@ func _on_body_entered(body: Node2D) -> void:
 			camera.zoom = Vector2.ONE
 			camera.global_position = _dialogue_entries.position
 			
+			body.velocity = Vector2.ZERO
+			
 			var textLabel = Label.new()
 			add_child(textLabel)
 			textLabel.text = _dialogue_entries.text

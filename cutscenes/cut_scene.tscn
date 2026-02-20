@@ -11,6 +11,8 @@ metadata/_custom_type_script = "uid://dc80ok1i611m0"
 radius = 55.061935
 height = 496.0039
 
+[sub_resource type="LabelSettings" id="LabelSettings_i6ikx"]
+
 [node name="CutScene" type="Area2D" unique_id=146410709]
 script = ExtResource("1_34lru")
 dialogue = SubResource("Resource_bxpg1")
@@ -18,3 +20,8 @@ dialogue = SubResource("Resource_bxpg1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1234230346]
 rotation = -1.567686
 shape = SubResource("CapsuleShape2D_fq6my")
+
+[node name="Label" type="Label" parent="." unique_id=1375415574]
+offset_right = 40.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_i6ikx")
