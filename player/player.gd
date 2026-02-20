@@ -47,7 +47,7 @@ func _physics_process(delta):
 				closeClick = true
 
 # Player Movement
-	if !closeClick:
+	if not closeClick:
 		if position.distance_to(clickPosition) > 25:
 				var desired_angle = global_position.angle_to_point(clickPosition)
 				rotation = lerp_angle(rotation, desired_angle, rotationSpeed * delta)

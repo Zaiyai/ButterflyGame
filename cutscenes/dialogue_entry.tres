@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DialogueEntry" format=3 uid="uid://cde4h35it4wot"]
+
+[ext_resource type="Script" uid="uid://dc80ok1i611m0" path="res://cutscenes/dialogue_entry.gd" id="1_3iov3"]
+
+[resource]
+resource_name = "DialogueEntry"
+script = ExtResource("1_3iov3")

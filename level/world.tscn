@@ -3,12 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://3ketpr3fmsg" path="res://player/player.tscn" id="1_07nfa"]
 [ext_resource type="PackedScene" uid="uid://ceylh0c1e7l6h" path="res://audio/environment/ForestSounds.tscn" id="1_nadbi"]
 [ext_resource type="Texture2D" uid="uid://boto8qbhv6cuf" path="res://assets/tilesets/Grass_Tiles.webp" id="3_tjjer"]
-[ext_resource type="PackedScene" path="res://interactions/interaction area/interactive_flower.tscn" id="4_nadbi"]
+[ext_resource type="PackedScene" uid="uid://b6fcumoano42f" path="res://interactions/interaction area/interactive_flower.tscn" id="4_nadbi"]
 [ext_resource type="Texture2D" uid="uid://diarclu1bgyo1" path="res://assets/tilesets/GroundNFlowers.webp" id="5_drvcl"]
 [ext_resource type="Texture2D" uid="uid://cy8t60e7uxjmg" path="res://assets/tilesets/Taller_Trees.webp" id="5_gsqr6"]
 [ext_resource type="Texture2D" uid="uid://bmmr4l6so7480" path="res://assets/Screenshot_2026-02-17_152953.webp" id="5_lx6e4"]
 [ext_resource type="Script" uid="uid://dj8w85anihgtg" path="res://level/camera_zoom_area.gd" id="6_hx6qw"]
 [ext_resource type="PackedScene" uid="uid://n2xogrdexdf8" path="res://entities/butterflies/butterflies_container.tscn" id="7_riu67"]
+[ext_resource type="PackedScene" uid="uid://b4h18pbu8rv7n" path="res://cutscenes/cut_scene.tscn" id="10_xd8br"]
+[ext_resource type="Script" uid="uid://dc80ok1i611m0" path="res://cutscenes/dialogue_entry.gd" id="11_njrq0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nadbi"]
 texture = ExtResource("3_tjjer")
@@ -351,12 +353,18 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSet" id="TileSet_xd8br"]
 sources/0 = SubResource("TileSetAtlasSource_drvcl")
 
+[sub_resource type="Resource" id="Resource_1jcqx"]
+script = ExtResource("11_njrq0")
+text = "Ayo man was good g"
+position = Vector2(-342, -1651)
+metadata/_custom_type_script = "uid://dc80ok1i611m0"
+
 [node name="World" type="Node2D" unique_id=1756987506]
 position = Vector2(3, -3)
 
 [node name="ForestSounds" parent="." unique_id=456073008 instance=ExtResource("1_nadbi")]
 
-[node name="player" parent="." unique_id=1361834257 groups=["player"] instance=ExtResource("1_07nfa")]
+[node name="Player" parent="." unique_id=1361834257 groups=["player"] instance=ExtResource("1_07nfa")]
 z_index = 1
 position = Vector2(492, 258)
 
@@ -396,5 +404,10 @@ position = Vector2(654, 168)
 [node name="ButterfliesContainer" parent="." unique_id=836024158 instance=ExtResource("7_riu67")]
 position = Vector2(578, 66)
 
-[connection signal="body_entered" from="cameraZoomArea" to="player" method="_on_camera_zoom_area_body_entered"]
-[connection signal="body_exited" from="cameraZoomArea" to="player" method="_on_camera_zoom_area_body_exited"]
+[node name="CutScene" parent="." unique_id=146410709 instance=ExtResource("10_xd8br")]
+position = Vector2(568, -271)
+dialogue = SubResource("Resource_1jcqx")
+
+[connection signal="body_entered" from="cameraZoomArea" to="Player" method="_on_camera_zoom_area_body_entered"]
+[connection signal="body_exited" from="cameraZoomArea" to="Player" method="_on_camera_zoom_area_body_exited"]
+[connection signal="body_entered" from="CutScene" to="CutScene" method="_on_body_entered"]

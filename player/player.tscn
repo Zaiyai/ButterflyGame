@@ -62,7 +62,7 @@ background_mode = 3
 glow_enabled = true
 glow_bloom = 1.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1522574350]
+[node name="Player" type="CharacterBody2D" unique_id=1522574350]
 collision_mask = 2
 script = ExtResource("1_ebx5c")
 
