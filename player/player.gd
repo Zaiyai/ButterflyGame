@@ -23,6 +23,9 @@ var playerInArea = false
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
 
+# Tilemap layer
+@onready var grassLayer : TileMapLayer = get_parent().get_node("Grass")
+
 # Mouse Position Check
 func _ready():
 	clickPosition = global_position
@@ -32,12 +35,16 @@ func _physics_process(delta):
 	
 # Mouse Position Check and Turn
 	if Input.is_action_just_pressed("left click"):
-		clickPosition = get_global_mouse_position()
-		clickTargetRot = global_position.angle_to_point(clickPosition)
-		closeClick = false
+		var initialClickPosition = get_global_mouse_position()
 		
-		if position.distance_to(clickPosition) <= 35:
-			closeClick = true
+		# If click is inside tilemap
+		if grassLayer.get_cell_source_id(grassLayer.local_to_map(initialClickPosition)) != -1:
+			clickPosition = initialClickPosition
+			clickTargetRot = global_position.angle_to_point(clickPosition)
+			closeClick = false
+			
+			if position.distance_to(clickPosition) <= 35:
+				closeClick = true
 
 # Player Movement
 	if !closeClick:
@@ -47,8 +54,7 @@ func _physics_process(delta):
 				velocity = velocity.move_toward(forwardFace * speed, acceleration * delta)
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-	
-	if closeClick:
+	else: # If close click
 		if position.distance_to(clickPosition) > 5:
 			velocity = velocity.move_toward(position.direction_to(clickPosition) * speed, (acceleration * delta)/3)
 		else:
