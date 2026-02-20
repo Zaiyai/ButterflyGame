@@ -64,7 +64,8 @@ _data = {
 
 [node name="CutScene" type="Area2D" unique_id=146410709]
 script = ExtResource("1_34lru")
-dialogue = null
+dialogueAmount = 1
+dialogue_0 = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1234230346]
 rotation = -1.567686

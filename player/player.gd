@@ -40,10 +40,10 @@ func _on_cut_scene_exit() -> void:
 	camera.zoom = zoomDefault
 	camera.position = Vector2.ZERO
 
-func _on_cut_scene_switch(dialogueEntry: DialogueEntry) -> void:
+func _on_cut_scene_switch(targetPosition: Vector2) -> void:
 	can_move = false
 	camera.zoom = Vector2.ONE
-	camera.global_position = dialogueEntry.position
+	camera.global_position = targetPosition
 
 # Mouse Position Check
 func _ready():
@@ -66,19 +66,22 @@ func _physics_process(delta):
 				closeClick = true
 
 	# Player Move
-	if not closeClick:
-		if position.distance_to(clickPosition) > 25:
-				var desired_angle = global_position.angle_to_point(clickPosition)
-				rotation = lerp_angle(rotation, desired_angle, rotationSpeed * delta)
-				velocity = velocity.move_toward(forwardFace * speed, acceleration * delta)
-		else:
-			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-	
-	else: # If close click
-		if position.distance_to(clickPosition) > 5:
-			velocity = velocity.move_toward(position.direction_to(clickPosition) * speed, (acceleration * delta)/3)
-		else:
-			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+	if can_move:
+		if not closeClick:
+			if position.distance_to(clickPosition) > 25:
+					var desired_angle = global_position.angle_to_point(clickPosition)
+					rotation = lerp_angle(rotation, desired_angle, rotationSpeed * delta)
+					velocity = velocity.move_toward(forwardFace * speed, acceleration * delta)
+			else:
+				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		
+		else: # If close click
+			if position.distance_to(clickPosition) > 5:
+				velocity = velocity.move_toward(position.direction_to(clickPosition) * speed, (acceleration * delta)/3)
+			else:
+				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	
 	move_and_slide()
 	

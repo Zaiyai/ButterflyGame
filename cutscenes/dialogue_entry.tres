@@ -5,3 +5,5 @@
 [resource]
 resource_name = "DialogueEntry"
 script = ExtResource("1_3iov3")
+text = "Come and take a look at this"
+duration = 2.0

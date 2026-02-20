@@ -355,10 +355,18 @@ sources/0 = SubResource("TileSetAtlasSource_drvcl")
 
 [sub_resource type="Resource" id="Resource_1jcqx"]
 script = ExtResource("11_njrq0")
-text = "Ayo man was good g"
-position = Vector2(500, -200)
-duration = 2
+text = "Hey"
+duration = 2.0
 metadata/_custom_type_script = "uid://dc80ok1i611m0"
+
+[sub_resource type="Resource" id="Resource_kbmj6"]
+script = ExtResource("11_njrq0")
+text = "Come and take a look at this"
+duration = 4.0
+metadata/_custom_type_script = "uid://dc80ok1i611m0"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_njrq0"]
+radius = 370.48752
 
 [node name="World" type="Node2D" unique_id=1756987506]
 position = Vector2(3, -3)
@@ -405,9 +413,19 @@ position = Vector2(654, 168)
 [node name="ButterfliesContainer" parent="." unique_id=836024158 instance=ExtResource("7_riu67")]
 position = Vector2(578, 66)
 
-[node name="CutScene" parent="." unique_id=146410709 instance=ExtResource("10_xd8br")]
+[node name="CutScene" parent="." unique_id=146410709 node_paths=PackedStringArray("positionNode") instance=ExtResource("10_xd8br")]
 position = Vector2(568, -271)
-dialogue = SubResource("Resource_1jcqx")
+positionNode = NodePath("CutScenePosition")
+dialogueAmount = 2
+dialogue_0 = SubResource("Resource_1jcqx")
+dialogue_1 = SubResource("Resource_kbmj6")
+
+[node name="CutScenePosition" type="Node2D" parent="CutScene" unique_id=88146542]
+position = Vector2(-871, -1831)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CutScene" unique_id=988955018]
+position = Vector2(-869, -1826)
+shape = SubResource("CircleShape2D_njrq0")
 
 [connection signal="body_entered" from="cameraZoomArea" to="Player" method="_on_camera_zoom_area_body_entered"]
 [connection signal="body_exited" from="cameraZoomArea" to="Player" method="_on_camera_zoom_area_body_exited"]
