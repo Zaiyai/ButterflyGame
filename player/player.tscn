@@ -75,16 +75,6 @@ modulate = Color(2.2241454, 2.2241454, 2.2241454, 1)
 texture = ExtResource("2_rkbax")
 hframes = 6
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2144695653]
-offset = Vector2(20, 0)
-zoom = Vector2(1.8, 1.8)
-position_smoothing_enabled = true
-position_smoothing_speed = 4.0
-drag_left_margin = 0.05
-drag_top_margin = 0.08
-drag_right_margin = 0.05
-drag_bottom_margin = 0.08
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2121973431]
 libraries/ = SubResource("AnimationLibrary_qjkh3")
 
@@ -98,3 +88,17 @@ environment = SubResource("Environment_rkbax")
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=637038058]
 color = Color(1, 1, 1, 0.38431373)
 texture = ExtResource("3_g1dw6")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=592233097]
+offset = Vector2(20, 0)
+zoom = Vector2(1.8, 1.8)
+position_smoothing_enabled = true
+
+[node name="Label" type="Label" parent="Camera2D" unique_id=354439759]
+visible = false
+top_level = true
+offset_left = -95.0
+offset_top = 151.0
+offset_right = 119.0
+offset_bottom = 174.0
+text = "Click Anywhere to Continue"

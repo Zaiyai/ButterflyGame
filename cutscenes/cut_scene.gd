@@ -6,8 +6,16 @@ enum Type {DIALOGUE, PICTURE}
 
 var _type := Type.DIALOGUE
 var _dialogue_entries: DialogueEntry
+var can_end := false
+var cutscene_ongoing := false
 signal cutscene_switch
 signal cutscene_end
+signal cutscene_exit
+
+@onready var textLabel : Label = $Label
+@onready var timer : Timer = $Timer
+@onready var labelTimer : Timer = $Label/Timer
+@onready var animation : AnimationPlayer = $AnimationPlayer
 
 @export var type: Type:
 	get:
@@ -41,38 +49,36 @@ func _set(property, value):
 		_dialogue_entries = value
 		return true
 	return false
-	
-func show_dialogue():
-	$dialogueFade.play("fade_in")
-func hide_dialogue():
-	$dialogueFade.play("fade_out")
 
 @onready var camera = get_parent().get_node("Player/Camera2D")
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		if type == Type.DIALOGUE:
+			cutscene_ongoing = true
+			emit_signal("cutscene_switch", _dialogue_entries)
 			
-			show_dialogue.call()
+			animation.play("fadeIn")
 			
-			camera.zoom = Vector2.ONE
-			camera.global_position = _dialogue_entries.position
+			labelTimer.wait_time = _dialogue_entries.duration - 1.00
 			
-			emit_signal("cutscene_switch")
-			
-			var textLabel = Label.new()
-			add_child(textLabel)
 			textLabel.text = _dialogue_entries.text
 			textLabel.global_position = _dialogue_entries.position
 			
-			var textduration = Timer.new()
-			add_child(textduration)
-			textduration.one_shot = true
-			textduration.wait_time = _dialogue_entries.duration
-			textduration.start()
-			
-			if textduration.is_stopped() == true:
-				print("Timer has stopped")
-				if Input.is_action_just_pressed("left click"):
-					emit_signal("cutscene_end")
-					hide_dialogue.call()
+			timer.wait_time = _dialogue_entries.duration
+			timer.start()
+
+func _process(_delta: float) -> void:
+	if cutscene_ongoing and timer.is_stopped() and Input.is_action_just_pressed("left_click"):
+		cutscene_ongoing = false
+		emit_signal("cutscene_exit")
+
+func _on_timer_timeout() -> void:
+	emit_signal("cutscene_end")
+
+func _on_label_timer_timeout() -> void:
+	animation.play("fadeOut")
+
+func _on_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "fadeIn":
+		labelTimer.start()

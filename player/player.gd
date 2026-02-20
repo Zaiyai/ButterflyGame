@@ -23,17 +23,27 @@ var playerInArea = false
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
 
-# Tilemap layer
+# Children
 @onready var grassLayer : TileMapLayer = get_parent().get_node("Grass")
+@onready var camera : Camera2D = $Camera2D
+@onready var camera_label : Label = $Camera2D/Label
 
 var can_move: bool = true
 
 #Cutscene check
-func _on_cut_scene_cutscene_end() -> void:
-	can_move = can_move
+func _on_cut_scene_end() -> void:
+	camera_label.visible = true
+	
+func _on_cut_scene_exit() -> void:
+	camera_label.visible = false
+	can_move = true
+	camera.zoom = zoomDefault
+	camera.position = Vector2.ZERO
 
-func _on_cut_scene_cutscene_switch() -> void:
-	can_move = !can_move
+func _on_cut_scene_switch(dialogueEntry: DialogueEntry) -> void:
+	can_move = false
+	camera.zoom = Vector2.ONE
+	camera.global_position = dialogueEntry.position
 
 # Mouse Position Check
 func _ready():
@@ -41,43 +51,45 @@ func _ready():
 
 func _physics_process(delta):
 	var forwardFace: Vector2 = Vector2.RIGHT.rotated(rotation)
-
-#Player Control
-	if can_move:
-		# Mouse Position Check and Turn
-		if Input.is_action_just_pressed("left click"):
-			var initialClickPosition = get_global_mouse_position()
+	
+	# Mouse Position Check and Turn
+	if can_move and Input.is_action_just_pressed("left_click"):
+		var initialClickPosition = get_global_mouse_position()
 		
-			# If click is inside tilemap
-			if grassLayer.get_cell_source_id(grassLayer.local_to_map(initialClickPosition)) != -1:
-				clickPosition = initialClickPosition
-				clickTargetRot = global_position.angle_to_point(clickPosition)
-				closeClick = false
-				
-				if position.distance_to(clickPosition) <= 35:
-					closeClick = true
+		# If click is inside tilemap
+		if grassLayer.get_cell_source_id(grassLayer.local_to_map(initialClickPosition)) != -1:
+			clickPosition = initialClickPosition
+			clickTargetRot = global_position.angle_to_point(clickPosition)
+			closeClick = false
+			
+			if position.distance_to(clickPosition) <= 35:
+				closeClick = true
 
-		# Player Move
-		if not closeClick:
-			if position.distance_to(clickPosition) > 25:
-					var desired_angle = global_position.angle_to_point(clickPosition)
-					rotation = lerp_angle(rotation, desired_angle, rotationSpeed * delta)
-					velocity = velocity.move_toward(forwardFace * speed, acceleration * delta)
-			else:
-				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-		else: # If close click
-			if position.distance_to(clickPosition) > 5:
-				velocity = velocity.move_toward(position.direction_to(clickPosition) * speed, (acceleration * delta)/3)
-			else:
-				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-		
-		move_and_slide()
-
-# Camera Zoom Controller
+	# Player Move
+	if not closeClick:
+		if position.distance_to(clickPosition) > 25:
+				var desired_angle = global_position.angle_to_point(clickPosition)
+				rotation = lerp_angle(rotation, desired_angle, rotationSpeed * delta)
+				velocity = velocity.move_toward(forwardFace * speed, acceleration * delta)
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+	
+	else: # If close click
+		if position.distance_to(clickPosition) > 5:
+			velocity = velocity.move_toward(position.direction_to(clickPosition) * speed, (acceleration * delta)/3)
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+	
+	move_and_slide()
+	
+	# Camera Zoom Controller
 	if playerInArea:
-		$Camera2D.zoom = $Camera2D.zoom.lerp(zoomOut, zoomOutSpd * delta)
+		camera.zoom = camera.zoom.lerp(zoomOut, zoomOutSpd * delta)
 	else:
-		$Camera2D.zoom = $Camera2D.zoom.lerp(zoomDefault, zoomDefSpd * delta)
+		camera.zoom = camera.zoom.lerp(zoomDefault, zoomDefSpd * delta)
+	
+	if camera_label.visible:
+		camera_label.position = camera.global_position - Vector2(100, -100)
 
 # Camera Zoom Area Checker
 func _on_camera_zoom_area_body_entered(_body: Node2D) -> void:
