@@ -26,41 +26,52 @@ var playerInArea = false
 # Tilemap layer
 @onready var grassLayer : TileMapLayer = get_parent().get_node("Grass")
 
+var can_move: bool = true
+
+#Cutscene check
+func cutscene_start():
+	can_move = !can_move
+
+func _on_cut_scene_cutscene_start() -> void:
+	cutscene_start()
+
 # Mouse Position Check
 func _ready():
 	clickPosition = global_position
 
 func _physics_process(delta):
 	var forwardFace: Vector2 = Vector2.RIGHT.rotated(rotation)
-	
-# Mouse Position Check and Turn
-	if Input.is_action_just_pressed("left click"):
-		var initialClickPosition = get_global_mouse_position()
-		
-		# If click is inside tilemap
-		if grassLayer.get_cell_source_id(grassLayer.local_to_map(initialClickPosition)) != -1:
-			clickPosition = initialClickPosition
-			clickTargetRot = global_position.angle_to_point(clickPosition)
-			closeClick = false
-			
-			if position.distance_to(clickPosition) <= 35:
-				closeClick = true
 
-# Player Movement
-	if not closeClick:
-		if position.distance_to(clickPosition) > 25:
-				var desired_angle = global_position.angle_to_point(clickPosition)
-				rotation = lerp_angle(rotation, desired_angle, rotationSpeed * delta)
-				velocity = velocity.move_toward(forwardFace * speed, acceleration * delta)
-		else:
-			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-	else: # If close click
-		if position.distance_to(clickPosition) > 5:
-			velocity = velocity.move_toward(position.direction_to(clickPosition) * speed, (acceleration * delta)/3)
-		else:
-			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-	
-	move_and_slide()
+#Player Control
+	if can_move:
+		# Mouse Position Check and Turn
+		if Input.is_action_just_pressed("left click"):
+			var initialClickPosition = get_global_mouse_position()
+		
+			# If click is inside tilemap
+			if grassLayer.get_cell_source_id(grassLayer.local_to_map(initialClickPosition)) != -1:
+				clickPosition = initialClickPosition
+				clickTargetRot = global_position.angle_to_point(clickPosition)
+				closeClick = false
+				
+				if position.distance_to(clickPosition) <= 35:
+					closeClick = true
+
+		# Player Move
+		if not closeClick:
+			if position.distance_to(clickPosition) > 25:
+					var desired_angle = global_position.angle_to_point(clickPosition)
+					rotation = lerp_angle(rotation, desired_angle, rotationSpeed * delta)
+					velocity = velocity.move_toward(forwardFace * speed, acceleration * delta)
+			else:
+				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		else: # If close click
+			if position.distance_to(clickPosition) > 5:
+				velocity = velocity.move_toward(position.direction_to(clickPosition) * speed, (acceleration * delta)/3)
+			else:
+				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		
+		move_and_slide()
 
 # Camera Zoom Controller
 	if playerInArea:

@@ -16,7 +16,6 @@ var _dialogue_entries: DialogueEntry
 		_type = value
 		notify_property_list_changed()
 
-
 func _get_property_list():
 	var properties = []
 	
@@ -40,18 +39,24 @@ func _set(property, value):
 		_dialogue_entries = value
 		return true
 	return false
+	
+func show_dialogue():
+	$dialogueFade.play("fade_in")
 
 @onready var camera = get_parent().get_node("Player/Camera2D")
+signal cutscene_start
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		if type == Type.DIALOGUE:
-			camera.zoom = Vector2.ONE
-			camera.global_position = _dialogue_entries.position
-			
-			body.velocity = Vector2.ZERO
-			
-			var textLabel = Label.new()
-			add_child(textLabel)
-			textLabel.text = _dialogue_entries.text
-			textLabel.global_position = _dialogue_entries.position
+			if type == Type.DIALOGUE:
+				show_dialogue.call()
+				
+				camera.zoom = Vector2.ONE
+				camera.global_position = _dialogue_entries.position
+				
+				emit_signal("cutscene_start")
+				
+				var textLabel = Label.new()
+				add_child(textLabel)
+				textLabel.text = _dialogue_entries.text
+				textLabel.global_position = _dialogue_entries.position
