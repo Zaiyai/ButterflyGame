@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://n2xogrdexdf8" path="res://entities/butterflies/butterflies_container.tscn" id="7_riu67"]
 [ext_resource type="PackedScene" uid="uid://b4h18pbu8rv7n" path="res://cutscenes/cut_scene.tscn" id="10_xd8br"]
 [ext_resource type="Script" uid="uid://dc80ok1i611m0" path="res://cutscenes/dialogue_entry.gd" id="11_njrq0"]
+[ext_resource type="PackedScene" uid="uid://cckxjkx1pghar" path="res://entities/musical_cue_character/musical_cue_character.tscn" id="12_1jcqx"]
+[ext_resource type="AudioStream" uid="uid://rrtg1n4oy3sb" path="res://audio/frog/frog_A.ogg" id="13_kbmj6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nadbi"]
 texture = ExtResource("3_tjjer")
@@ -427,6 +429,11 @@ position = Vector2(-871, -1831)
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CutScene" unique_id=988955018]
 position = Vector2(-869, -1826)
 shape = SubResource("CircleShape2D_njrq0")
+
+[node name="MusicalCueCharacter" parent="." unique_id=871230993 instance=ExtResource("12_1jcqx")]
+position = Vector2(629, -18)
+note = 3
+audio = ExtResource("13_kbmj6")
 
 [connection signal="body_entered" from="cameraZoomArea" to="Player" method="_on_camera_zoom_area_body_entered"]
 [connection signal="body_exited" from="cameraZoomArea" to="Player" method="_on_camera_zoom_area_body_exited"]

@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cckxjkx1pghar"]
+
+[ext_resource type="Script" uid="uid://djw3823bj686x" path="res://entities/musical_cue_character/musical_cue_character.gd" id="1_1i4rm"]
+[ext_resource type="Texture2D" uid="uid://jpffe0p5k3hd" path="res://assets/character_sprites/frog.png" id="1_3e3ti"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1i4rm"]
+size = Vector2(53, 40)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0pc7p"]
+radius = 75.0
+height = 576.0
+
+[node name="MusicalCueCharacter" type="CharacterBody2D" unique_id=871230993]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_1i4rm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=248717912]
+bus = &"PitchShiftBus"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1427564394]
+texture = ExtResource("1_3e3ti")
+hframes = 4
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1828752767]
+position = Vector2(2.5, 9)
+shape = SubResource("RectangleShape2D_1i4rm")
+
+[node name="Vision" type="Area2D" parent="." unique_id=625588437]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" unique_id=351310534]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_0pc7p")
+
+[connection signal="body_entered" from="Vision" to="." method="_on_vision_body_entered"]
