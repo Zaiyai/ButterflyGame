@@ -12,9 +12,6 @@ const SPEED = 300.0
 
 func _ready() -> void:
 	audioPlayer.stream = audio
-	var effect = AudioServer.get_bus_effect(AudioServer.get_bus_index("PitchShiftBus"), 0)
-	if effect is AudioEffectPitchShift:
-		effect.pitch_scale += note
 
 func _physics_process(_delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
@@ -27,6 +24,10 @@ func _physics_process(_delta: float) -> void:
 
 func _on_vision_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		print("hello")
 		audioPlayer.play()
+		visible = false
 		#animation.start(gtfo)
+
+func _on_vision_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		visible = true

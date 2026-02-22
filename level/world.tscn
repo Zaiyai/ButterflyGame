@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://dc80ok1i611m0" path="res://cutscenes/dialogue_entry.gd" id="11_njrq0"]
 [ext_resource type="PackedScene" uid="uid://cckxjkx1pghar" path="res://entities/musical_cue_character/musical_cue_character.tscn" id="12_1jcqx"]
 [ext_resource type="AudioStream" uid="uid://rrtg1n4oy3sb" path="res://audio/frog/frog_A.ogg" id="13_kbmj6"]
+[ext_resource type="AudioStream" uid="uid://dc2fcf38e22hn" path="res://audio/frog/frog_B.ogg" id="14_5y8g2"]
+[ext_resource type="AudioStream" uid="uid://bo1ewbiepmukl" path="res://audio/frog/frog_C.ogg" id="15_ilqn7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nadbi"]
 texture = ExtResource("3_tjjer")
@@ -432,8 +434,17 @@ shape = SubResource("CircleShape2D_njrq0")
 
 [node name="MusicalCueCharacter" parent="." unique_id=871230993 instance=ExtResource("12_1jcqx")]
 position = Vector2(629, -18)
-note = 3
 audio = ExtResource("13_kbmj6")
+
+[node name="MusicalCueCharacter2" parent="." unique_id=384185221 instance=ExtResource("12_1jcqx")]
+position = Vector2(655, -86)
+note = 11
+audio = ExtResource("14_5y8g2")
+
+[node name="MusicalCueCharacter3" parent="." unique_id=1867466224 instance=ExtResource("12_1jcqx")]
+position = Vector2(661, -160)
+note = 4
+audio = ExtResource("15_ilqn7")
 
 [connection signal="body_entered" from="cameraZoomArea" to="Player" method="_on_camera_zoom_area_body_entered"]
 [connection signal="body_exited" from="cameraZoomArea" to="Player" method="_on_camera_zoom_area_body_exited"]
